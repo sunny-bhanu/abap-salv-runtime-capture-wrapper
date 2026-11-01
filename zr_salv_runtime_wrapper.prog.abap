@@ -45,7 +45,8 @@ CLASS lcl_wrapper DEFINITION FINAL.
       RAISING   cx_salv_bs_sc_runtime_info.
     METHODS enrich
       IMPORTING ir_data TYPE REF TO data.
-    METHODS display.
+    METHODS display
+      RAISING cx_salv_error.
 ENDCLASS.
 
 CLASS lcl_wrapper IMPLEMENTATION.
@@ -57,7 +58,7 @@ CLASS lcl_wrapper IMPLEMENTATION.
         display( ).
       CATCH cx_salv_bs_sc_runtime_info INTO DATA(lx_rt).
         MESSAGE lx_rt->get_text( ) TYPE 'S' DISPLAY LIKE 'E'.
-      CATCH cx_salv_msg INTO DATA(lx_salv).
+      CATCH cx_salv_error INTO DATA(lx_salv).
         MESSAGE lx_salv->get_text( ) TYPE 'S' DISPLAY LIKE 'E'.
     ENDTRY.
   ENDMETHOD.
